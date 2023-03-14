@@ -1,0 +1,46 @@
+# if debian/ubuntu: also install node-gyp
+
+FROM frolvlad/alpine-glibc:alpine-3.10_glibc-2.29
+
+RUN set -ex; \
+    apk update; \
+    apk add --no-cache \
+        git \
+        bash \
+        nano \
+        ncdu \
+# for npx
+        npm \
+        yarn \
+        make \
+        g++ \
+        python3 \
+        openjdk8
+
+ENV ANDROID_SDK_ROOT="/home/appuser/app/sdk" \
+    ANDROID_HOME="/home/appuser/app/sdk" \
+    NODE_ENV="development" \
+    NODE_OPTIONS="--max-old-space-size=8192"
+
+RUN set -ex
+RUN mkdir -p "/home/appuser/app/sdk/licenses" "/home/appuser/app/incognito/"
+RUN printf "\n24333f8a63b6825ea9c5514f83c2829b004d1fee" > "/home/appuser/app/sdk/licenses/android-sdk-license"
+RUN cd /home/appuser/app/incognito/
+COPY . /home/appuser/app/incognito/incognito-wallet
+#RUN git clone https://github.com/incognitochain/incognito-wallet
+WORKDIR /home/appuser/app/incognito/incognito-wallet
+RUN yarn install --ignore-engines
+#RUN cp ./.sample.env ./.env
+RUN printf "NODE_PASSWORD=\nNODE_USER_NAME=" >> .\.env
+RUN keytool -genkey -v -keystore /home/appuser/app/incognito/incognito-wallet/android/app/wallet-app-release-key.keystore -alias wallet-app-key-alias -storepass 123456 -keypass 123456 -keyalg RSA -keysize 2048 -validity 10000 -dname CN=IL
+RUN yarn buildDebug
+
+ENTRYPOINT ["tail"]
+CMD ["-f","/dev/null"]
+#RUN   git checkout 4.5.1
+    # yarn postinstall;
+    #    yarn install --ignore-engines --frozen-lockfile --production ; \
+#    yarn install --ignore-engines; \
+    #cd android; \
+    #printf "#!/bin/sh\n/bin/true" > /home/appuser/app/incognito/incognito-wallet/node_modules/@react-native-community/cli/setup_env.sh; \
+    # ./gradlew assembleRelease

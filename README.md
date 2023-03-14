@@ -1,3 +1,16 @@
+```
+ docker build . -t incognito_base
+ ### long-long long await
+ docker run -dti --name iw incognito_base
+ docker cp iw:/home/appuser/app/incognito/incognito-wallet/android/app/build/outputs/apk/debug/app-debug.apk  ~/app-debug.apk
+ 
+ 
+```
+
+
+
+
+
 # Incognito Chain Wallet
 
 Setup React Native following this guide: [React Native Setup](https://facebook.github.io/react-native/docs/getting-started).
