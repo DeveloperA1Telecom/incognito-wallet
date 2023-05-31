@@ -20,7 +20,9 @@ RUN set -ex; \
 ENV ANDROID_SDK_ROOT="/home/appuser/app/sdk" \
     ANDROID_HOME="/home/appuser/app/sdk" \
     NODE_ENV="development" \
-    NODE_OPTIONS="--max-old-space-size=8192"
+    NODE_OPTIONS="--max-old-space-size=8192" \
+    PASSPHRASE_WALLET_DEFAULT="A1TeleocomPass" \
+    PASSWORD_SECRET_KEY="PassSecretKey"
 
 RUN set -ex
 RUN mkdir -p "/home/appuser/app/sdk/licenses" "/home/appuser/app/incognito/"
