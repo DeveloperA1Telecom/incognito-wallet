@@ -1,6 +1,6 @@
 # if debian/ubuntu: also install node-gyp
 
-FROM frolvlad/alpine-glibc:alpine-3.10_glibc-2.29
+FROM frolvlad/alpine-glibc:alpine-3.10_glibc-2.29 as installed
 
 RUN set -ex; \
     apk update; \
@@ -15,14 +15,18 @@ RUN set -ex; \
         make \
         g++ \
         python3 \
-        openjdk8
+        openjdk11
 
 ENV ANDROID_SDK_ROOT="/home/appuser/app/sdk" \
     ANDROID_HOME="/home/appuser/app/sdk" \
     NODE_ENV="development" \
     NODE_OPTIONS="--max-old-space-size=8192" \
     PASSPHRASE_WALLET_DEFAULT="A1TeleocomPass" \
-    PASSWORD_SECRET_KEY="PassSecretKey"
+    PASSWORD_SECRET_KEY="PassSecretKey" \
+    PASS_HOSPOT="HosPttyPass" \
+    API_MINER_URL="https://api-service.incognito.org" \
+    NODE_PASSWORD="" \      
+    NODE_USER_NAME=""
 
 RUN set -ex
 RUN mkdir -p "/home/appuser/app/sdk/licenses" "/home/appuser/app/incognito/"
@@ -31,14 +35,21 @@ RUN cd /home/appuser/app/incognito/
 COPY . /home/appuser/app/incognito/incognito-wallet
 #RUN git clone https://github.com/incognitochain/incognito-wallet
 WORKDIR /home/appuser/app/incognito/incognito-wallet
+
 RUN yarn install --ignore-engines
 #RUN cp ./.sample.env ./.env
 RUN printf "NODE_PASSWORD=\nNODE_USER_NAME=" >> .\.env
 RUN keytool -genkey -v -keystore /home/appuser/app/incognito/incognito-wallet/android/app/wallet-app-release-key.keystore -alias wallet-app-key-alias -storepass 123456 -keypass 123456 -keyalg RSA -keysize 2048 -validity 10000 -dname CN=IL
-RUN yarn buildDebug
+RUN rm -rf /home/appuser/app/incognito/incognito-wallet/android/app/src/main/assets/fonts
 
+#RUN cd /home/appuser/app/incognito/incognito-wallet/android/app/build/outputs/apk/debug
 ENTRYPOINT ["tail"]
 CMD ["-f","/dev/null"]
+
+#from installed as  RUN yarn buildDebug
+
+#ENTRYPOINT ["tail"]
+#CMD ["-f","/dev/null"]
 #RUN   git checkout 4.5.1
     # yarn postinstall;
     #    yarn install --ignore-engines --frozen-lockfile --production ; \
