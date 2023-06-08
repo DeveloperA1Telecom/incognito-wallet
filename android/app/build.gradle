@@ -165,14 +165,14 @@ android {
     buildTypes {
         release {
             resValue "string", "CodePushDeploymentKey", '"1IKsmeDfHkZ2uxo3CvcCamuLdUTazow5b3tAu"'
-            resValue 'string', 'app_name', '"Incognito Wallet"'
+            resValue 'string', 'app_name', '"CSP Incognito Wallet"'
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
         }
         debug {
             resValue "string", "CodePushDeploymentKey", '"DKYq2x5W3PEMjVs_BSzQygQD26Q0oOYIb8OXM"'
-            resValue 'string', 'app_name', '"Debug Incognito Wallet"'
+            resValue 'string', 'app_name', '"CSP Incognito Wallet"'
             applicationIdSuffix '.debug'
             debuggable true
         }
