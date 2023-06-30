@@ -7,7 +7,7 @@ import {
   UNI_CONSTANTS,
 } from 'incognito-chain-web-js/build/wallet';
 
-export const MAINNET_FULLNODE = 'http://5.199.169.57:8334'
+export const MAINNET_FULLNODE = 'https://csp-fullnode.org';
 
 export const INCOGNITO_MAINNET_FULLNODE = 'https://lb-fullnode.incognito.org/fullnode';
 export const MAINNET_1_FULLNODE = 'http://51.83.237.20:9338';

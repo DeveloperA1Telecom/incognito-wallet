@@ -7,6 +7,9 @@ docker exec -it iw /bin/bash
 ### inside docker
  cd /home/appuser/app/incognito/incognito-wallet/
  yarn buildDebug
+#Ctrl+C exit docker
+
+# Run on host 
  docker cp iw:/home/appuser/app/incognito/incognito-wallet/android/app/build/outputs/apk/debug/app-debug.apk  /home/app-debug.apk
 
 
