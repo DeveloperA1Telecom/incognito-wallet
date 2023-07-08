@@ -36,9 +36,9 @@ COPY . /home/appuser/app/incognito/incognito-wallet
 RUN --mount=type=bind,source=./package.json,target=./package.json
 RUN yarn install --ignore-engines
 
-RUN --mount=type=bind,source=./src,target=./src \
-    --mount=type=bind,source=./node_modules,target=./node_modules \
-    ls src
+RUN --mount=type=bind,source=./src,target=./src 
+#RUN --mount=type=bind,source=./node_modules,target=./node_modules \
+#RUN   ls ./src
  #--mount=type=bind,source=./package.json,target=./package.json \
    
 #RUN --mount=target=./src ./src
