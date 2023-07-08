@@ -33,15 +33,29 @@ RUN mkdir -p "/home/appuser/app/sdk/licenses" "/home/appuser/app/incognito/"
 RUN printf "\n24333f8a63b6825ea9c5514f83c2829b004d1fee" > "/home/appuser/app/sdk/licenses/android-sdk-license"
 RUN cd /home/appuser/app/incognito/
 COPY . /home/appuser/app/incognito/incognito-wallet
+RUN --mount=type=bind,source=./package.json,target=./package.json
+RUN yarn install --ignore-engines
+
+RUN --mount=type=bind,source=./src,target=./src \
+    --mount=type=bind,source=./node_modules,target=./node_modules \
+    ls src
+ #--mount=type=bind,source=./package.json,target=./package.json \
+   
+#RUN --mount=target=./src ./src
+#    --mount=type=cache,target=./node_modules/
+#    --mount=type=cache,target=/go/pkg \
+#    GOOS=$TARGETOS GOARCH=$TARGETARCH go build -o /out/myapp .
+
 #RUN git clone https://github.com/incognitochain/incognito-wallet
 WORKDIR /home/appuser/app/incognito/incognito-wallet
 
-RUN yarn install --ignore-engines
 #RUN cp ./.sample.env ./.env
 RUN printf "NODE_PASSWORD=\nNODE_USER_NAME=" >> .\.env
 RUN keytool -genkey -v -keystore /home/appuser/app/incognito/incognito-wallet/android/app/wallet-app-release-key.keystore -alias wallet-app-key-alias -storepass 123456 -keypass 123456 -keyalg RSA -keysize 2048 -validity 10000 -dname CN=IL
 RUN rm -rf /home/appuser/app/incognito/incognito-wallet/android/app/src/main/assets/fonts
-
+EXPOSE 8081
+EXPOSE 5037
+EXPOSE 5555
 #RUN cd /home/appuser/app/incognito/incognito-wallet/android/app/build/outputs/apk/debug
 ENTRYPOINT ["tail"]
 CMD ["-f","/dev/null"]
