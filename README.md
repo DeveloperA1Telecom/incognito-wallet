@@ -1,10 +1,19 @@
 ```
- docker build . -t incognito_base
- ### long-long long await
- docker run -dti --name iw incognito_base
- docker cp iw:/home/appuser/app/incognito/incognito-wallet/android/app/build/outputs/apk/debug/app-debug.apk  ~/app-debug.apk
- 
- 
+docker build . -t iw
+### long-long long await
+docker run -dti --name iw iw
+docker exec -it iw /bin/bash
+
+### inside docker
+ cd /home/appuser/app/incognito/incognito-wallet/
+ yarn buildDebug
+#Ctrl+C exit docker
+
+# Run on host 
+ docker cp iw:/home/appuser/app/incognito/incognito-wallet/android/app/build/outputs/apk/debug/app-debug.apk  /home/app-debug.apk
+
+
+### /home/app-debug.apk - is a built file
 ```
 
 

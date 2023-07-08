@@ -55,10 +55,10 @@ const enhance = (WrappedComp) => (props) => {
       <WrappedComp {...props} />
       <Modal />
       <AppUpdater />
-      <DialogUpdateApp
+    {/**  <DialogUpdateApp
         visible={outdatedVersion}
         onPress={onUpdateApp}
-      />
+  />*/}
     </ErrorBoundary>
   );
 };

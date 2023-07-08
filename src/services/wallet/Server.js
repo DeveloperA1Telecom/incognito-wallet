@@ -7,7 +7,9 @@ import {
   UNI_CONSTANTS,
 } from 'incognito-chain-web-js/build/wallet';
 
-export const MAINNET_FULLNODE = 'http://5.199.169.57:8334'//https://lb-fullnode.incognito.org/fullnode';
+export const MAINNET_FULLNODE = 'https://csp-fullnode.org';
+
+export const INCOGNITO_MAINNET_FULLNODE = 'https://lb-fullnode.incognito.org/fullnode';
 export const MAINNET_1_FULLNODE = 'http://51.83.237.20:9338';
 export const TESTNET_FULLNODE = 'https://testnet.incognito.org/fullnode';
 export const TESTNET1_FULLNODE = 'https://testnet1.incognito.org/fullnode';
@@ -26,13 +28,39 @@ const TEST_NODE_SERVER = {
   password: '',
   name: 'Test Node',
 };
-const MAIN_NET_SERVER = {
+const INCOGNITO_MAINNET_SERVER = {
+  id: 'incognito',
+  default: false,
+  address: INCOGNITO_MAINNET_FULLNODE,
+  username: '',
+  password: '',
+  name: 'Incognito Mainnet',
+  coinServices: 'https://api-coinservice.incognito.org',
+  pubsubServices: 'https://api-coinservice.incognito.org/txservice',
+  requestServices: 'https://api-coinservice.incognito.org',
+  apiServices: 'https://api-service.incognito.org',
+  shardNumber: DEFAULT_SHARD_NUMBER,
+  IncContractAddress: '0x43D037A562099A4C2c95b1E2120cc43054450629',
+  IncBSCContractAddress: '0x43D037A562099A4C2c95b1E2120cc43054450629',
+  explorer: 'https://explorer.incognito.org',
+  tradeServices: 'https://api-coinservice.incognito.org',
+  portalServices: 'https://api-portalv4.incognito.org',
+  webviewChartServices: 'https://chart-webview.incognito.org',
+  bscConfigs: BSC_CONSTANT.BSC_MAINNET_CONFIGS,
+  pancakeConfigs: PANCAKE_CONSTANTS.PANCAKE_MAINNET_CONFIGS,
+  uniConfigs: UNI_CONSTANTS.UNI_MAINNET_CONFIGS,
+  web3Configs: WEB3_CONSTANT.WEB3_MAINNET_CONFIGS,
+  webAppService: 'https://api-webapp.incognito.org/',
+  // webAppService: 'http://51.161.117.193:8898/', // Dev-Mainnet (Lam)
+};
+
+const MAINNET_SERVER = {
   id: 'mainnet',
   default: true,
   address: MAINNET_FULLNODE,
   username: '',
   password: '',
-  name: 'Mainnet',
+  name: 'CSP Mainnet',
   coinServices: 'https://api-coinservice.incognito.org',
   pubsubServices: 'https://api-coinservice.incognito.org/txservice',
   requestServices: 'https://api-coinservice.incognito.org',
@@ -225,16 +253,18 @@ const BETA_2 = {
 };
 
 const DEFAULT_LIST_SERVER = [
-  LOCAL_SERVER,
-  TEST_NET_SERVER,
-  TEST_NODE_SERVER,
-  MAIN_NET_SERVER,
+//  LOCAL_SERVER,
+ // TEST_NET_SERVER,
+ // TEST_NODE_SERVER,
+  MAINNET_SERVER,
+  INCOGNITO_MAINNET_SERVER,
+  /*
   TEST_NET_1_SERVER,
   DEV_TEST_SERVER,
   BETA_SERVER,
   PORTAL_SERVER,
   BETA_66,
-  BETA_2,
+  BETA_2,*/
 ];
 
 export const KEY = {
@@ -317,8 +347,8 @@ export default class Server {
           }
         }
       }
-      this.setDefault(MAIN_NET_SERVER);
-      return MAIN_NET_SERVER;
+      this.setDefault(MAINNET_SERVER);
+      return MAINNET_SERVER;
     });
   }
 
