@@ -10,8 +10,7 @@ import org.unimodules.adapters.react.ReactModuleRegistryProvider;
 import org.unimodules.core.interfaces.SingletonModule;
 
 import com.facebook.react.PackageList;
-import com.facebook.react.ReactApplication;
-import com.dylanvann.fastimage.FastImageViewPackage;
+import com.facebook.react.ReactApplication;
 import io.rumors.reactnativesettings.RNSettingsPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.facebook.react.ReactNativeHost;

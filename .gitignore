@@ -55,8 +55,8 @@ buck-out/
 *.jsbundle
 
 # env
-.env
-.env.*
+#.env
+#.env.*
 
 ios/Pods
 ios/Incognito/Index/
