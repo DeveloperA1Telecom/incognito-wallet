@@ -26,7 +26,7 @@ import {
   actionNavigateFormMarketTab,
 } from '@screens/PDexV3/features/Swap/Swap.actions';
 
-const Market = React.memo((props) => {
+const Market = (props) => {
   const { keySearch, onFilter, ...rest } = props;
 
   const activeTab = useSelector(marketTabSelector);
@@ -88,7 +88,7 @@ const Market = React.memo((props) => {
       />
     </>
   );
-});
+};
 
 Market.propTypes = {
   handleToggleFollowToken: PropTypes.func.isRequired,

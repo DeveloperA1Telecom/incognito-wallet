@@ -33,9 +33,10 @@ class NetworkSetting extends Component {
     const { setDefaultNetwork } = this.props;
     this.setState({ loading: true });
     await setDefaultNetwork(network);
-    this.setState({ loading: false }, () => {
+    this.setState({ loading: false });
+    setTimeout(() => {
       RNRestart.Restart();
-    });
+    }, 900);
   };
 
   render() {
